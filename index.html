@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard layout demo</title>
+    <title>ISI Incendio - Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -13,19 +13,18 @@
     <header>
         <div class="menu-icon">
             <i class="fas fa-bars"></i>
-            <img id="logo" src="logo-isi-light-CMberm3w.png" style="max-height: 24px;">
+            <span style="font-weight: bold; font-size: 20px; margin-left: 10px;">ISI Incendio</span>
         </div>
         <div class="user-profile">
             <div class="user-details">
-                <div class="name">Carlos</div>
+                <div class="name">Luis</div>
                 <div id="role" class="role">Administrador</div>
             </div>
-            <div class="avatar">C</div>
+            <div class="avatar">L</div>
         </div>
     </header>
 
     <div class="layout-container">
-        
         <aside>
             <i class="sidebar-icon active fas fa-th-large"></i>
             <i class="sidebar-icon fas fa-user-friends"></i>
@@ -41,25 +40,120 @@
         <main>
             <div class="view-toggles">
                 <button class="toggle-btn active" onclick="switchView('admin')" id="btn-admin">
-                    <i class="fas fa-eye"></i> Admin
+                    <i class="fas fa-user-shield"></i> Admin
                 </button>
                 <button class="toggle-btn" onclick="switchView('client')" id="btn-client">
-                    <i class="fas fa-eye"></i> Cliente
+                    <i class="fas fa-user"></i> Cliente
                 </button>
             </div>
 
+            <!-- ADMIN VIEW -->
             <div class="view-content active" id="view-admin">
-                
-                <div id="d3-admin-container" style="margin-top:20px;"></div>
+                <div id="d3-admin-container" class="dashboard-wrapper">
+                    
+                    <!-- General KPIs (Unaffected by Client Filter) -->
+                    <div class="kpi-section">
+                        <div class="kpi-card">
+                            <div class="kpi-title">Clientes Activos</div>
+                            <div class="kpi-value" id="kpi-clients">-</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Citas Hoy (Hechas / Total)</div>
+                            <div class="kpi-value"><span id="kpi-appt-done" class="highlight">0</span> / <span id="kpi-appt-total">0</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Servicios Hoy (Hechos / Total)</div>
+                            <div class="kpi-value"><span id="kpi-srv-done" class="highlight">0</span> / <span id="kpi-srv-total">0</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Promedio Diario (Citas | Serv.)</div>
+                            <div class="kpi-value"><span id="kpi-avg-appt">0</span> | <span id="kpi-avg-srv">0</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Filter & dependent KPI -->
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <label for="client-filter">Filtrar por Cliente:</label>
+                            <select id="client-filter">
+                                <option value="ALL">Todos los clientes</option>
+                            </select>
+                        </div>
+                        <div class="filter-kpi">
+                            <span class="kpi-title">Visitas Totales (por cliente seleccionado):</span>
+                            <span class="kpi-value highlight" id="kpi-filtered-visits">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Charts grid -->
+                    <div class="charts-grid">
+                        <!-- Chart 1 -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Citas: Confirmadas vs Totales <span class="highlight-percent" id="pct-chart1"></span></div>
+                                <div class="chart-controls">
+                                    <input type="date" id="date-start-chart1" title="Inicio">
+                                    <input type="date" id="date-end-chart1" title="Fin">
+                                    <button class="toggle-chart-btn" id="toggle-chart1" data-type="line"><i class="fas fa-chart-pie"></i></button>
+                                </div>
+                            </div>
+                            <div id="chart1-container" class="chart-body"></div>
+                        </div>
+
+                        <!-- Chart 2 -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Citas: Realizadas vs Programadas <span class="highlight-percent" id="pct-chart2"></span></div>
+                                <div class="chart-controls">
+                                    <input type="date" id="date-start-chart2">
+                                    <input type="date" id="date-end-chart2">
+                                    <button class="toggle-chart-btn" id="toggle-chart2" data-type="line"><i class="fas fa-chart-pie"></i></button>
+                                </div>
+                            </div>
+                            <div id="chart2-container" class="chart-body"></div>
+                        </div>
+
+                        <!-- Chart 3 -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Servicios: Realizados vs Programados <span class="highlight-percent" id="pct-chart3"></span></div>
+                                <div class="chart-controls">
+                                    <input type="date" id="date-start-chart3">
+                                    <input type="date" id="date-end-chart3">
+                                    <button class="toggle-chart-btn" id="toggle-chart3" data-type="line"><i class="fas fa-chart-pie"></i></button>
+                                </div>
+                            </div>
+                            <div id="chart3-container" class="chart-body"></div>
+                        </div>
+
+                        <!-- Chart 4 -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Hallazgos: Abiertos vs Cerrados <span class="highlight-percent" id="pct-chart4"></span></div>
+                                <div class="chart-controls">
+                                    <input type="date" id="date-start-chart4">
+                                    <input type="date" id="date-end-chart4">
+                                    <button class="toggle-chart-btn" id="toggle-chart4" data-type="line"><i class="fas fa-chart-pie"></i></button>
+                                </div>
+                            </div>
+                            <div id="chart4-container" class="chart-body"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
+            <!-- CLIENT VIEW  -->
             <div class="view-content" id="view-client">
-        
-                <div id="d3-client-container" style="margin-top:20px;"></div>
+                <div id="d3-client-container" style="margin-top:20px;">
+                    <h2>Vista de Cliente</h2>
+                    <p>Contenido en construcción...</p>
+                </div>
             </div>
         </main>
     </div>
 
     <script src="script.js"></script>
+    <script src="admin-dashboard.js"></script>
 </body>
 </html>
