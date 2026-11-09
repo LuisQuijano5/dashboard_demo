@@ -145,9 +145,77 @@
 
             <!-- CLIENT VIEW  -->
             <div class="view-content" id="view-client">
-                <div id="d3-client-container" style="margin-top:20px;">
-                    <h2>Vista de Cliente</h2>
-                    <p>Contenido en construcción...</p>
+                <div id="d3-client-container" class="dashboard-wrapper">
+                    
+                    <!-- Client KPIs -->
+                    <div class="kpi-section">
+                        <!-- Contract expiry -->
+                        <div class="kpi-card">
+                            <div class="kpi-title">Vigencia de Contrato</div>
+                            <div class="kpi-value" id="kpi-contract-date" style="font-size: 20px;">31 Dic 2027</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"><div class="progress-fill" id="kpi-contract-bar"></div></div>
+                                <span class="progress-text" id="kpi-contract-pct">0%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Visits -->
+                        <div class="kpi-card">
+                            <div class="kpi-title">Visitas Realizadas (Año)</div>
+                            <div class="kpi-value" id="kpi-client-visits" style="font-size: 28px;">0</div>
+                            <div class="kpi-subtitle" id="kpi-visits-status">Estado: Evaluando...</div>
+                        </div>
+
+                        <!-- Asset coverage -->
+                        <div class="kpi-card">
+                            <div class="kpi-title">Cobertura de Activos (Frecuencias)</div>
+                            <div class="kpi-value" style="font-size: 20px;"><span id="kpi-freq-covered" class="highlight">0</span> / <span id="kpi-freq-total">0</span> Requeridas</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"><div class="progress-fill" id="kpi-asset-bar" style="background-color: #28a745;"></div></div>
+                                <span class="progress-text" id="kpi-asset-pct">0%</span>
+                            </div>
+                            <div class="kpi-subtitle">Equipos Totales: <span id="kpi-assets-total">0</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 3-columns -->
+                    <div class="client-lists-grid">
+                        <!-- Upcoming -->
+                        <div class="list-column">
+                            <div class="list-header"><i class="fas fa-calendar-alt"></i> Próximas Citas</div>
+                            <div class="list-body" id="client-upcoming-list"></div>
+                        </div>
+                        <!-- Recommendations -->
+                        <div class="list-column">
+                            <div class="list-header"><i class="fas fa-lightbulb"></i> Recomendaciones</div>
+                            <div class="list-body" id="client-recommendations-list"></div>
+                        </div>
+                        <!-- Achievements -->
+                        <div class="list-column">
+                            <div class="list-header"><i class="fas fa-trophy"></i> Logros y Cierres</div>
+                            <div class="list-body" id="client-achievements-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Client charts grid -->
+                    <div class="charts-grid" style="margin-top: 25px;">
+                        <!-- Burndown findings -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Hallazgos Activos</div>
+                            </div>
+                            <div id="client-chart1-container" class="chart-body"></div>
+                        </div>
+
+                        <!-- Brnup services -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Servicios: Cobertura vs Avance</div>
+                            </div>
+                            <div id="client-chart2-container" class="chart-body"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
@@ -155,5 +223,6 @@
 
     <script src="script.js"></script>
     <script src="admin-dashboard.js"></script>
+    <script src="client-dashboard.js"></script>
 </body>
 </html>

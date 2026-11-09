@@ -309,7 +309,7 @@ function updateFilteredView() {
     let sumTotal1 = d3.sum(dataC1, d=>d.val1), sumConf = d3.sum(dataC1, d=>d.val2);
     document.getElementById('pct-chart1').innerText = sumTotal1 ? Math.round((sumConf/sumTotal1)*100) + '%' : '0%';
     renderChart('chart1-container', dataC1, { 
-        type: c1Type, scopeLabel: 'Total Citas (Acumulado)', progressLabel: 'Confirmadas (Acumulado)',
+        type: c1Type, scopeLabel: 'Total Citas', progressLabel: 'Confirmadas',
         pieLabelRest: 'Por Confirmar', pieLabelDone: 'Confirmadas'
     });
 
@@ -321,7 +321,7 @@ function updateFilteredView() {
     let sumTotal2 = d3.sum(dataC2, d=>d.val1), sumDone2 = d3.sum(dataC2, d=>d.val2);
     document.getElementById('pct-chart2').innerText = sumTotal2 ? Math.round((sumDone2/sumTotal2)*100) + '%' : '0%';
     renderChart('chart2-container', dataC2, { 
-        type: c2Type, scopeLabel: 'Total Programadas (Acum.)', progressLabel: 'Realizadas (Acum.)',
+        type: c2Type, scopeLabel: 'Total Programadas', progressLabel: 'Realizadas',
         pieLabelRest: 'Pendientes', pieLabelDone: 'Realizadas'
     });
 
@@ -343,7 +343,7 @@ function updateFilteredView() {
     let sumTotal3 = d3.sum(dataC3, d=>d.val1), sumDone3 = d3.sum(dataC3, d=>d.val2);
     document.getElementById('pct-chart3').innerText = sumTotal3 ? Math.round((sumDone3/sumTotal3)*100) + '%' : '0%';
     renderChart('chart3-container', dataC3, { 
-        type: c3Type, scopeLabel: 'Total Servicios (Acum.)', progressLabel: 'Servicios Realizados (Acum.)',
+        type: c3Type, scopeLabel: 'Total Servicios', progressLabel: 'Servicios Realizados',
         pieLabelRest: 'Pendientes', pieLabelDone: 'Realizados',
         alertText: 'Servicio ANUAL' 
     });
@@ -366,7 +366,7 @@ function updateFilteredView() {
     let sumTotal4 = d3.sum(dataC4, d=>d.val1), sumClosed = d3.sum(dataC4, d=>d.val2);
     document.getElementById('pct-chart4').innerText = sumTotal4 ? Math.round((sumClosed/sumTotal4)*100) + '%' : '0%';
     renderChart('chart4-container', dataC4, { 
-        type: c4Type, scopeLabel: 'Total Hallazgos (Acum.)', progressLabel: 'Hallazgos Cerrados (Acum.)',
+        type: c4Type, scopeLabel: 'Total Hallazgos', progressLabel: 'Hallazgos Cerrados',
         pieLabelRest: 'Abiertos', pieLabelDone: 'Cerrados',
         alertText: 'Severidad DEACTIVATION' 
     });
