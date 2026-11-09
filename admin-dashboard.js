@@ -377,3 +377,13 @@ window.onload = () => {
     initFilters();
     updateFilteredView();
 };
+
+window.addEventListener('resize', () => {
+    clearTimeout(window.adminResizeTimer);
+    
+    window.adminResizeTimer = setTimeout(() => {
+        if (document.getElementById('view-admin').classList.contains('active')) {
+            updateFilteredView();
+        }
+    }, 250);
+});

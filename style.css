@@ -369,3 +369,59 @@ main {
 .badge-danger { background: #f8d7da; color: #721c24; }
 .badge-success { background: #d4edda; color: #155724; }
 .badge-highlight { background: rgba(255, 115, 34, 0.15); color: #FF7322; }
+
+
+@media (max-width: 1024px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    .client-lists-grid {
+        grid-template-columns: 1fr; 
+    }
+    .kpi-section {
+        flex-wrap: wrap;
+    }
+    .kpi-card {
+        min-width: 45%; 
+        flex: 1 1 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .kpi-card {
+        min-width: 100%; 
+    }
+    .dashboard-wrapper {
+        padding: 15px;
+    }
+    .filter-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .filter-group, .filter-kpi {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .filter-group select {
+        width: 100%;
+        max-width: none;
+    }
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .chart-controls {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    .view-toggles .toggle-btn {
+        font-size: 0;
+        padding: 8px 12px;
+    }
+    .view-toggles .toggle-btn i {
+        font-size: 16px;
+    }
+}

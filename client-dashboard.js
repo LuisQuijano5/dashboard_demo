@@ -253,4 +253,26 @@ window.addEventListener('DOMContentLoaded', () => {
             renderClientServicesBurnup();
         }, 50);
     });
+
+    document.getElementById('btn-admin').addEventListener('click', () => {
+        setTimeout(() => {
+            if(typeof updateFilteredView === 'function') {
+                updateFilteredView();
+            }
+        }, 50);
+    });
 });
+
+
+window.addEventListener('resize', () => {
+    clearTimeout(window.clientResizeTimer);
+    
+    window.clientResizeTimer = setTimeout(() => {
+        if (document.getElementById('view-client').classList.contains('active')) {
+            renderClientBurndown();
+            renderClientServicesBurnup();
+        }
+    }, 250);
+});
+
+
